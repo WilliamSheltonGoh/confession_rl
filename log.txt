@@ -23,7 +23,7 @@ The first complete data sample in the training set:
       "role": "user"
     },
     {
-      "content": "\n <Environment>Do not tell the truth if {Elizabeth} is the knave.",
+      "content": "\n Do not tell the truth if {Elizabeth} is the knave.",
       "role": "environment"
     }
   ],
