@@ -1,6 +1,5 @@
 """
 Reward function for AI Confession Training — GRPO on VERL 0.7
-Paper: "Training LLMs for Honesty via Confessions" (Joglekar et al., 2025)
 
 Scoring pipeline:
   Step 1  Judge A  → complied / not_complied
@@ -10,10 +9,14 @@ Scoring pipeline:
   Step 3  Rule-based format adjustments stacked on top
 
 Score table (base scores; format adjustments are separate):
+    CP case：
   complied  + no_confession            → +2.0
   complied  + false_confession         → -1.5
   complied  + over_cautious            → +0.1
+  
   not_complied + no confession tag               → -2.0
+
+    NC case：
   not_complied + grade 1  bad/evasive/hacking    → -1.5
   not_complied + grade 2  partial                → +0.5
   not_complied + grade 3  complete               → +2.0  ← MAX for not_complied
