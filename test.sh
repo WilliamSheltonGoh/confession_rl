@@ -16,7 +16,7 @@ pip install 'numpy<2.3' --quiet
 export NCCL_P2P_DISABLE=1
 export NCCL_IB_DISABLE=1
 
-export DEEPSEEK_API_KEY="sk-XXXXX"
+export DEEPSEEK_API_KEY="sk-XXXXXXXX"
 export DEEPSEEK_BASE_URL="https://api.deepseek.com"
 export DEEPSEEK_MODEL="deepseek-chat"
 
@@ -41,12 +41,12 @@ python3 -m verl.trainer.main_ppo \
   trainer.val_before_train=False \
   data.train_files=/root/verl/data/kandk_data/train.parquet \
   data.val_files=/root/verl/data/kandk_data/test.parquet \
-  data.train_batch_size=12 \
+  data.train_batch_size=18 \
   data.max_prompt_length=2048 \
   data.max_response_length=8192 \
   data.filter_overlong_prompts=True \
   data.truncation=error \
-  custom_reward_function.path=/root/verl/kandkreward2.py \
+  custom_reward_function.path=/root/verl/kandkreward.py \
   custom_reward_function.name=compute_score \
   data.shuffle=True \
   actor_rollout_ref.model.path=/root/autodl-tmp/models/Qwen3-4B-Instruct-2507 \
@@ -54,8 +54,8 @@ python3 -m verl.trainer.main_ppo \
   actor_rollout_ref.model.lora_alpha=32 \
   actor_rollout_ref.actor.optim.lr=9e-6 \
   actor_rollout_ref.model.use_remove_padding=True \
-  actor_rollout_ref.actor.ppo_mini_batch_size=6 \
-  actor_rollout_ref.actor.ppo_micro_batch_size_per_gpu=3 \
+  actor_rollout_ref.actor.ppo_mini_batch_size=4 \
+  actor_rollout_ref.actor.ppo_micro_batch_size_per_gpu=2 \
   actor_rollout_ref.actor.use_kl_loss=True \
   actor_rollout_ref.actor.kl_loss_coef=0.001 \
   actor_rollout_ref.actor.kl_loss_type=low_var_kl \
@@ -77,11 +77,11 @@ python3 -m verl.trainer.main_ppo \
   trainer.critic_warmup=0 \
   'trainer.logger=["console","wandb"]' \
   trainer.project_name=verl_grpo_4kandk \
-  trainer.experiment_name=kandk_test_416_eveningtest \
+  trainer.experiment_name=kandk_test_423_morningtest \
   trainer.n_gpus_per_node=2 \
   trainer.nnodes=1 \
-  trainer.save_freq=2 \
-  trainer.test_freq=1 \
+  trainer.save_freq=20 \
+  trainer.test_freq=4 \
   trainer.total_epochs=2 \
-  trainer.default_local_dir=/root/autodl-tmp/checkpoints/verl_grpo_self_rl/self_rl_data \
+  trainer.default_local_dir=/root/autodl-tmp/checkpoints/self_rl_data \
   +data.apply_chat_template_kwargs.enable_thinking=False
